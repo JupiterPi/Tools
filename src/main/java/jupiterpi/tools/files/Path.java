@@ -19,7 +19,7 @@ public class Path {
      */
     protected List<String> dirs = new ArrayList<>();
     /**
-     * The file name (optional).
+     * The file name (only for paths pointing to a file).
      */
     protected String fileName = null;
 
