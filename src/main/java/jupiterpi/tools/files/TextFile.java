@@ -54,12 +54,7 @@ public class TextFile {
             }
             Reader.close();
         } catch (IOException x) {
-            try {
-                file.createNewFile();
-                initialize(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            x.printStackTrace();
         }
     }
 
