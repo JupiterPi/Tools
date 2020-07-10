@@ -1,30 +1,27 @@
 package jupiterpi.tools.files;
 
-import jupiterpi.tools.files.csv.CSVFile;
-import jupiterpi.tools.files.json.JSONFile;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-public class ResourcesFile {
-    String name;
+public class ResourcesFile extends TextFile {
+    protected String name;
 
     public ResourcesFile(String name) {
+        super(Path.getRunningDirectory().file("delete-this.txt"));
         this.name = name;
+        InputStream is = getClass().getClassLoader().getResourceAsStream(name);
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        read(br);
     }
 
-    public File file() {
-        return new File(getClass().getClassLoader().getResource(name).getFile());
-    }
+    @Override
+    protected void read(File file) {}
 
-    public TextFile textFile() {
-        return new TextFile(file());
-    }
-
-    public CSVFile csvFile() {
-        return new CSVFile(file());
-    }
-
-    public JSONFile jsonFile() {
-        return new JSONFile(file());
+    @Override
+    public void saveFile() {
+        System.err.println("You are trying to edit a read-only resources file! (" + name + ")");
     }
 }

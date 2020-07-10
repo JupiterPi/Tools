@@ -10,17 +10,17 @@ public class TextFile {
     /**
      * The name of the file you want to access.
      */
-    private File file;
+    protected File file;
 
     /**
      * All the lines on the file.
      */
-    private List<String> lines = new ArrayList();
+    protected List<String> lines = new ArrayList();
 
     /**
      * Whether the file should automatically be saved when editing lines.
      */
-    private boolean autosave = false;
+    protected boolean autosave = false;
 
     /* constructors */
 
@@ -97,7 +97,7 @@ public class TextFile {
         return this;
     }
 
-    private void read(File file) {
+    protected void read(File file) {
         this.file = file;
         if (!file.exists()) {
             try {
@@ -106,16 +106,20 @@ public class TextFile {
                 e.printStackTrace();
             }
         }
-
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            read(new BufferedReader(new FileReader(file)));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void read(BufferedReader bufferedReader) {
+        try {
             String line;
             while((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
             bufferedReader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -205,7 +209,7 @@ public class TextFile {
         as();
     }
 
-    private void as() {
+    protected void as() {
         if (autosave) saveFile();
     }
 

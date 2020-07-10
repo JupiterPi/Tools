@@ -4,7 +4,6 @@ import jupiterpi.tools.files.Path;
 import jupiterpi.tools.files.TextFile;
 import org.json.simple.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,27 +15,15 @@ public class JSONFile extends JSONData {
     /**
      * The JSON file.
      */
-    protected File file;
+    protected TextFile file;
 
     /**
      * Creates a new JSONFile from a file.
      * @param file The file to generate the JSONFile from.
      */
-    public JSONFile(File file) {
-        super(new TextFile(file).getContentContinuum());
+    public JSONFile(TextFile file) {
+        super(file.getContentContinuum());
         this.file = file;
-    }
-
-    /**
-     * Creates a new JSONFile from a path string.
-     * @deprecated Use JSONFile(Path) instead.
-     * @param path The string to generate the path to the file from.
-     * @see Path
-     */
-    @Deprecated
-    public JSONFile(String path) {
-        super(new TextFile(path).getContentContinuum());
-        this.file = new File(path);
     }
 
     /**
@@ -46,7 +33,7 @@ public class JSONFile extends JSONData {
      */
     public JSONFile(Path path) {
         super(new TextFile(path).getContentContinuum());
-        this.file = path.file();
+        this.file = new TextFile(path);
     }
 
     /**
@@ -55,7 +42,6 @@ public class JSONFile extends JSONData {
      */
     public void write(JSONObject content) {
         String text = content.toJSONString();
-        TextFile file = new TextFile(this.file);
         List<String> lines = new ArrayList<>();
         lines.add(text);
         file.setFile(lines);

@@ -1,6 +1,7 @@
 package jupiterpi.tools.files.csv;
 
 import jupiterpi.tools.files.Path;
+import jupiterpi.tools.files.TextFile;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -24,21 +25,8 @@ public class CSVObjectsFile<T extends CSVCastable> extends CSVFile {
      * @param file The file to read from.
      * @param clazz The type of the objects in the file.
      */
-    public CSVObjectsFile(File file, Class clazz) {
+    public CSVObjectsFile(TextFile file, Class clazz) {
         super(file);
-        this.clazz = clazz;
-    }
-
-    /**
-     * Creates a new CSVObjectsFile object.
-     * @deprecated Use CSVObjectsFile(Path) instead.
-     * @param path The string to generate the path to the file from.
-     * @see Path
-     * @param clazz The type of objects in the file.
-     */
-    @Deprecated
-    public CSVObjectsFile(String path, Class clazz) {
-        super(path);
         this.clazz = clazz;
     }
 

@@ -1,9 +1,8 @@
 package jupiterpi.tools.files.csv;
 
-import jupiterpi.tools.files.TextFile;
 import jupiterpi.tools.files.Path;
+import jupiterpi.tools.files.TextFile;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,27 +14,16 @@ public class CSVFile extends CSVData {
     /**
      * The CSV file.
      */
-    protected File file;
+    protected TextFile file;
 
     /**
-     * Creates a new CSVFile from a file.
-     * @param file The file to read the data from.
+     * Creates a new CSVFile from a text file.
+     * @param file The text file to read the data from.
+     * @see TextFile
      */
-    public CSVFile(File file) {
-        super(new TextFile(file).getFile());
+    public CSVFile(TextFile file) {
+        super(file.getFile());
         this.file = file;
-    }
-
-    /**
-     * Creates a new CSVFile from a path string.
-     * @deprecated Use CSVFile(Path) instead.
-     * @param path The string to generate the path to the file from.
-     * @see Path
-     */
-    @Deprecated
-    public CSVFile(String path) {
-        super(new TextFile(new Path(path)).getFile());
-        this.file = new Path(path).file();
     }
 
     /**
@@ -45,7 +33,7 @@ public class CSVFile extends CSVData {
      */
     public CSVFile(Path path) {
         super(new TextFile(path).getFile());
-        this.file = path.file();
+        this.file = new TextFile(path);
     }
 
     /**
@@ -63,7 +51,6 @@ public class CSVFile extends CSVData {
             line = line.substring(0, line.length()-1);
             lines.add(line);
         }
-        TextFile file = new TextFile(this.file);
         file.setFile(lines);
         file.saveFile();
     }

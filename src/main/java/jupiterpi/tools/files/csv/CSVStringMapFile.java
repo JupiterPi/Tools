@@ -1,6 +1,7 @@
 package jupiterpi.tools.files.csv;
 
 import jupiterpi.tools.files.Path;
+import jupiterpi.tools.files.TextFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,19 +14,12 @@ import java.util.Map;
  * @see CSVFile
  */
 public class CSVStringMapFile extends CSVFile {
-    public CSVStringMapFile(File file) {
-        super(file);
-    }
-
     /**
      * Creates a new CSVStringMap object.
-     * @deprecated Use CSVStringMap(Path) instead.
-     * @param path The string to generate the path to the file from.
-     * @see Path
+     * @param file The text file with the data.
      */
-    @Deprecated
-    public CSVStringMapFile(String path) {
-        super(path);
+    public CSVStringMapFile(TextFile file) {
+        super(file);
     }
 
     /**
