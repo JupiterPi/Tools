@@ -32,9 +32,13 @@ public class Path {
         if (path.contains("/")) parts = path.split("/");
         else parts = path.split("\\\\");
         for (String part : parts) {
-            if (part.contains(":")) drive = part;
-            else if (part.contains(".")) fileName = part;
-            else dirs.add(part);
+            if (!part.equals("")) {
+                if (part.contains(":")) drive = part;
+                else if (part.contains(".")) {
+                    if (part.indexOf(".") == part.length()-1) part = part.substring(0, part.length()-1);
+                    fileName = part;
+                } else dirs.add(part);
+            }
         }
     }
 
@@ -182,7 +186,10 @@ public class Path {
     protected String generateFormattedPath(String drive, List<String> dirs, String fileName, Platform platform) {
         String str = "";
         String separator = "/";
-        if (platform == Platform.WINDOWS) str += drive; separator = "\\";
+        if (platform == Platform.WINDOWS) {
+            str += drive;
+            separator = "\\";
+        }
         for (String dir : dirs) {
             str += separator + dir;
         }

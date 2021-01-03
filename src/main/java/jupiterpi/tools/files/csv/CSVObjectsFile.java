@@ -55,8 +55,6 @@ public class CSVObjectsFile<T extends CSVCastable> extends CSVFile {
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
-            System.out.println(constructor);
-            System.out.println(attributes.length);
             String[][] varargs = {attributes};
             T object = null;
             try {
