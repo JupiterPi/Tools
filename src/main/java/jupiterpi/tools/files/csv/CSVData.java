@@ -1,6 +1,9 @@
 package jupiterpi.tools.files.csv;
 
+import jupiterpi.tools.util.ToolsUtil;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,7 +34,13 @@ public class CSVData {
     public List<String[]> get() {
         List<String[]> linesParts = new ArrayList<>();
         for (String line : lines) {
-            linesParts.add(line.split(REGEX));
+            String[] parts = line.split(REGEX);
+            if (line.endsWith(REGEX)) {
+                List<String> partsList = ToolsUtil.asArrayList(parts);
+                partsList.add("");
+                parts = partsList.toArray(new String[0]);
+            }
+            linesParts.add(parts);
         }
         return linesParts;
     }

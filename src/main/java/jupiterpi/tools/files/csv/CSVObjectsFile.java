@@ -22,11 +22,12 @@ public class CSVObjectsFile<T extends CSVCastable> extends CSVFile {
 
     /**
      * Creates a new CSVObjectsFile object.
-     * @param file The file to read from.
-     * @param clazz The type of the objects in the file.
+     * @param path The path to the CSV file.
+     * @see Path
+     * @param clazz The type of objects in the file.
      */
-    public CSVObjectsFile(TextFile file, Class clazz) {
-        super(file);
+    public CSVObjectsFile(Path path, Class clazz) {
+        super(path);
         this.clazz = clazz;
     }
 
@@ -36,8 +37,8 @@ public class CSVObjectsFile<T extends CSVCastable> extends CSVFile {
      * @see Path
      * @param clazz The type of objects in the file.
      */
-    public CSVObjectsFile(Path path, Class clazz) {
-        super(path);
+    public CSVObjectsFile(Path path, Class clazz, boolean allowCreate) {
+        super(path, allowCreate);
         this.clazz = clazz;
     }
 

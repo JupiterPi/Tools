@@ -29,7 +29,11 @@ public class TextFile {
      * @param file The name of the file.
      */
     public TextFile(String file) {
-        read(new File(file));
+        try {
+            read(new File(file), false);
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -37,7 +41,11 @@ public class TextFile {
      * @param file The file the TextFile shall represent.
      */
     public TextFile(File file) {
-        read(file);
+        try {
+            read(file, false);
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -45,38 +53,50 @@ public class TextFile {
      * @param path The path to the file.
      */
     public TextFile(Path path) {
-        read(path.file());
+        try {
+            read(path.file(), false);
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Creates a new TextFile.
      * @param file The name of the file.
-     * @param autosave Whether the file should automatically be saved when editing lines.
      */
-    public TextFile(String file, boolean autosave) {
-        read(new File(file));
-        this.autosave = autosave;
+    public TextFile(String file, boolean allowCreate) {
+        try {
+            read(new File(file), allowCreate);
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Creates a new TextFile.
      * @param file The file the TextFile shall represent.
-     * @param autosave Whether the file should automatically be saved when editing lines.
      */
-    public TextFile(File file, boolean autosave) {
-        read(file);
-        this.autosave = autosave;
+    public TextFile(File file, boolean allowCreate) {
+        try {
+            read(file, allowCreate);
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Creates a new TextFile.
      * @param path The path to the file.
-     * @param autosave Whether the file should automatically be saved when editing lines.
      */
-    public TextFile(Path path, boolean autosave) {
-        read(path.file());
-        this.autosave = autosave;
+    public TextFile(Path path, boolean allowCreate) {
+        try {
+            read(path.file(), allowCreate);
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
+
+    /* autosave */
 
     /**
      * Sets whether the file should automatically be saved when editing lines.
@@ -97,13 +117,17 @@ public class TextFile {
         return this;
     }
 
-    protected void read(File file) {
+    protected void read(File file, boolean allowCreate) throws DoesNotExistException {
         this.file = file;
         if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (allowCreate) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                throw new DoesNotExistException();
             }
         }
         try {
@@ -122,6 +146,12 @@ public class TextFile {
             bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public class DoesNotExistException extends Exception {
+        public DoesNotExistException() {
+            super("The file specified for this TextFile object does not exist. ");
         }
     }
 

@@ -16,10 +16,11 @@ import java.util.Map;
 public class CSVStringMapFile extends CSVFile {
     /**
      * Creates a new CSVStringMap object.
-     * @param file The text file with the data.
+     * @param path The path to the CSV file.
+     * @see Path
      */
-    public CSVStringMapFile(TextFile file) {
-        super(file);
+    public CSVStringMapFile(Path path) {
+        super(path);
     }
 
     /**
@@ -27,8 +28,8 @@ public class CSVStringMapFile extends CSVFile {
      * @param path The path to the CSV file.
      * @see Path
      */
-    public CSVStringMapFile(Path path) {
-        super(path);
+    public CSVStringMapFile(Path path, boolean allowCreate) {
+        super(path, allowCreate);
     }
 
     /**

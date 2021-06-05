@@ -12,18 +12,19 @@ import java.util.List;
  */
 public class CSVFile extends CSVData {
     /**
-     * The CSV file.
+     * The path to the CSV file.
+     * @see Path
      */
-    protected TextFile file;
+    protected Path filePath;
 
     /**
-     * Creates a new CSVFile from a text file.
-     * @param file The text file to read the data from.
-     * @see TextFile
+     * Creates a new CSVFile object.
+     * @param path The path to the CSV file.
+     * @see Path
      */
-    public CSVFile(TextFile file) {
-        super(file.getFile());
-        this.file = file;
+    public CSVFile(Path path, boolean allowCreate) {
+        super(new TextFile(path, allowCreate).getFile());
+        filePath = path;
     }
 
     /**
@@ -33,7 +34,7 @@ public class CSVFile extends CSVData {
      */
     public CSVFile(Path path) {
         super(new TextFile(path).getFile());
-        this.file = new TextFile(path);
+        filePath = path;
     }
 
     /**
@@ -41,6 +42,7 @@ public class CSVFile extends CSVData {
      * @param linesParts The lines, represented by an array of strings between the regexes.
      */
     public void write(List<String[]> linesParts) {
+        TextFile file = new TextFile(filePath);
         List<String> lines = new ArrayList<>();
         for (String[] lineParts : linesParts) {
             String line = "";
