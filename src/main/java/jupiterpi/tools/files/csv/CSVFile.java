@@ -3,6 +3,7 @@ package jupiterpi.tools.files.csv;
 import jupiterpi.tools.files.Path;
 import jupiterpi.tools.files.TextFile;
 
+import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,20 +13,9 @@ import java.util.List;
  */
 public class CSVFile extends CSVData {
     /**
-     * The path to the CSV file.
-     * @see Path
+     * The CSV file.
      */
-    protected Path filePath;
-
-    /**
-     * Creates a new CSVFile object.
-     * @param path The path to the CSV file.
-     * @see Path
-     */
-    public CSVFile(Path path, boolean allowCreate) {
-        super(new TextFile(path, allowCreate).getFile());
-        filePath = path;
-    }
+    protected TextFile file;
 
     /**
      * Creates a new CSVFile object.
@@ -34,7 +24,16 @@ public class CSVFile extends CSVData {
      */
     public CSVFile(Path path) {
         super(new TextFile(path).getFile());
-        filePath = path;
+        file = new TextFile(path);
+    }
+
+    /**
+     * Creates a new CSVFile object.
+     * @param file The CSV file.
+     */
+    public CSVFile(TextFile file) {
+        super(file.getFile());
+        this.file = file;
     }
 
     /**
@@ -42,7 +41,6 @@ public class CSVFile extends CSVData {
      * @param linesParts The lines, represented by an array of strings between the regexes.
      */
     public void write(List<String[]> linesParts) {
-        TextFile file = new TextFile(filePath);
         List<String> lines = new ArrayList<>();
         for (String[] lineParts : linesParts) {
             String line = "";

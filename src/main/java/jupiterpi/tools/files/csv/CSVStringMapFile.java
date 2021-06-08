@@ -25,11 +25,10 @@ public class CSVStringMapFile extends CSVFile {
 
     /**
      * Creates a new CSVStringMap object.
-     * @param path The path to the CSV file.
-     * @see Path
+     * @param file The CSV file.
      */
-    public CSVStringMapFile(Path path, boolean allowCreate) {
-        super(path, allowCreate);
+    public CSVStringMapFile(TextFile file) {
+        super(file);
     }
 
     /**

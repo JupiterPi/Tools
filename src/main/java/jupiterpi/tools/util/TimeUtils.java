@@ -36,7 +36,7 @@ public class TimeUtils {
 
     /* format durations */
 
-    private static final List<String> durationComponents = Arrays.asList("d:86400", "h:360", "m:60", "s:1");
+    private static final List<String> durationComponents = Arrays.asList("d:86400", "h:3600", "m:60", "s:1");
 
     public static String formatDuration(int s) {
         List<String> components = new ArrayList<>();

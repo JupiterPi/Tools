@@ -33,12 +33,11 @@ public class CSVObjectsFile<T extends CSVCastable> extends CSVFile {
 
     /**
      * Creates a new CSVObjectsFile object.
-     * @param path The path to the CSV file.
-     * @see Path
+     * @param file The CSV file.
      * @param clazz The type of objects in the file.
      */
-    public CSVObjectsFile(Path path, Class clazz, boolean allowCreate) {
-        super(path, allowCreate);
+    public CSVObjectsFile(TextFile file, Class clazz) {
+        super(file);
         this.clazz = clazz;
     }
 
