@@ -64,36 +64,24 @@ public class TextFile {
      * Creates a new TextFile.
      * @param file The name of the file.
      */
-    public TextFile(String file, boolean allowCreate) {
-        try {
-            read(new File(file), allowCreate);
-        } catch (DoesNotExistException e) {
-            e.printStackTrace();
-        }
+    public TextFile(String file, boolean allowCreate) throws DoesNotExistException {
+        read(new File(file), allowCreate);
     }
 
     /**
      * Creates a new TextFile.
      * @param file The file the TextFile shall represent.
      */
-    public TextFile(File file, boolean allowCreate) {
-        try {
-            read(file, allowCreate);
-        } catch (DoesNotExistException e) {
-            e.printStackTrace();
-        }
+    public TextFile(File file, boolean allowCreate) throws DoesNotExistException {
+        read(file, allowCreate);
     }
 
     /**
      * Creates a new TextFile.
      * @param path The path to the file.
      */
-    public TextFile(Path path, boolean allowCreate) {
-        try {
-            read(path.file(), allowCreate);
-        } catch (DoesNotExistException e) {
-            e.printStackTrace();
-        }
+    public TextFile(Path path, boolean allowCreate) throws DoesNotExistException {
+        read(path.file(), allowCreate);
     }
 
     /* autosave */
