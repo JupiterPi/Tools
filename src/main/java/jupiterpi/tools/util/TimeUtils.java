@@ -39,6 +39,7 @@ public class TimeUtils {
     private static final List<String> durationComponents = Arrays.asList("d:86400", "h:3600", "m:60", "s:1");
 
     public static String formatDuration(int s) {
+        if (s == 0) return "0";
         List<String> components = new ArrayList<>();
         for (String component : durationComponents) {
             String[] parts = component.split(":");
